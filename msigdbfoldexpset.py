@@ -83,10 +83,11 @@ def main():
                 print("Exception: {}".format(inst), flush=True)
 
     G = nx.relabel_nodes(G, relabels)
-    plt.subplot(111)
     pos = nx.spring_layout(G)
+    edge_labels = nx.get_edge_attributes(G, 'label')
+    plt.subplot(111)
     nx.draw(G, pos, with_labels=True, node_size=10000)
-    nx.draw_networkx_edge_labels(G)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels)
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
