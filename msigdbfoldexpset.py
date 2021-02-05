@@ -107,7 +107,7 @@ def main():
                 "data": image_b64,
             })
 
-    for k, v in sorted(keys.items(), key=lambda item: item[1])
+    for k, v in sorted(keys.items(), key=lambda item: item[1]):
         gn.add_result("{}: {}".format(v, k), "markdown")
 
     timing = "* Finished differential expression sets step in {} seconds*".format(time_passed)
