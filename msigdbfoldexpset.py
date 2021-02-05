@@ -49,14 +49,14 @@ def main():
     resultsmap = {}
     for gset in gsets:
         for cluster in clustercomparisonstotest:
-            print("Cluster = {}".format(cluster), flush=True)
-            print("Gene ids = {}".format(gset["gene_ids"]), flush=True)
-            resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
-            print(resultdf, flush=True)
-            score = np.nanmin(resultdf)
-            print("Score = {}".format(score), flush=True)
-            if score >= min_zscore:
-                resultsmap[gset["name"]] = resultsmap.get(gset["name"], {}) + {cluster: score}
+            try:
+                resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
+                score = np.nanmin(resultdf)
+                print("Score = {}".format(score), flush=True)
+                if score >= min_zscore:
+                    resultsmap[gset["name"]] = resultsmap.get(gset["name"], {}) + {cluster: score}
+            except:
+                print("Key error with {}".format(gset["name"]), flush=True)
 
     print(resultsmap)
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
