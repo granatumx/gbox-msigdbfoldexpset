@@ -73,7 +73,7 @@ def main():
                     resultsmap[gset["name"]] = olddict
                     from_to = re.split(' vs ', cluster)
                     if from_to[1] != 'rest':
-                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
+                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"], weight=score*10.0)
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
