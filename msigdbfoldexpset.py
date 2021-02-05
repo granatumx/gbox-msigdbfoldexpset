@@ -109,7 +109,7 @@ def main():
 
     footnote = ""
     for k, v in sorted(keys.items(), key=lambda item: item[1]):
-        newstr = "{}: {}".format(v, k)
+        newstr = "{}: [{}]({})".format(v, k, gsets[k]["url"])
         if footnote == "" :
             footnote = newstr
         else:
