@@ -61,26 +61,30 @@ def main():
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
     relabels = {}
+    keys = {}
+    currentkeyindex = 0
     for gset in gsets:
         for cluster in clustercomparisonstotest:
             try:
                 resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
                 score = np.nanmean(resultdf)
                 if score >= min_zscore:
+                    keys[gset["name"]] = keys.get(gset["name"], currentkeyindex)
                     print("Score = {}".format(score))
                     olddict = resultsmap.get(gset["name"], {})
                     olddict[cluster] = score
                     resultsmap[gset["name"]] = olddict
                     from_to = re.split(' vs ', cluster)
                     if from_to[1] != 'rest':
-                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"], weight=score*10.0)
+                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=str(currentkeyindex), weight=score*10.0)
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
-                            relabel_dict = from_to[0] + ": " + gset["name"]
+                            relabel_dict = from_to[0] + ": " + currentkeyindex
                         else:
-                            relabel_dict = relabel_dict + "\\n " + gset["name"]
+                            relabel_dict = relabel_dict + ", " + currentkeyindex
                         relabels[from_to[0]] = relabel_dict
+                    currentkeyindex = currentkeyindex + 1
             except Exception as inst:
                 print("Key error with {}".format(gset["name"]), flush=True)
                 print("Exception: {}".format(inst), flush=True)
@@ -103,6 +107,11 @@ def main():
                 "data": image_b64,
             })
 
+    for k, v in sorted(keys.items(), key=lambda item: item[1])
+        gn.add_result("{}: {}".format(v, k), "markdown")
+
+    timing = "* Finished differential expression sets step in {} seconds*".format(time_passed)
+    gn.add_result(timing, "markdown")
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
     toc = time.perf_counter()
