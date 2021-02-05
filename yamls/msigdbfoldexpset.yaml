@@ -6,7 +6,7 @@ meta:
     MSigDB allows the analysis of gene sets to determine if pathways or tissue types are active in the clusters.
 endpoints:
   backend:
-    cmd: python ./msigdbfoldexprset.py
+    cmd: python ./msigdbfoldexpset.py
     type: docker
     image: {GBOX}
 frontend:
