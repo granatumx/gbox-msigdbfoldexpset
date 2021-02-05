@@ -7,6 +7,7 @@ import time
 import math
 from granatum_sdk import Granatum
 import networkx as nx
+import re
 
 def parse_gmt(gmt_str):
     lines = gmt_str.split("\n")
@@ -67,7 +68,7 @@ def main():
                     olddict[cluster] = score
                     resultsmap[gset["name"]] = olddict
                     print("Done adding score", flush=True)
-                    from_to = Regex.Split(cluster, " vs ")
+                    from_to = re.split(' vs ', cluster)
                     if len(from_to) > 1:
                         G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
                     else:
