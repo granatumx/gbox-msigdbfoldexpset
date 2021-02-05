@@ -9,6 +9,7 @@ import math
 from granatum_sdk import Granatum
 import networkx as nx
 import re
+from networkx.drawing.nx_agraph import write_dot
 
 def parse_gmt(gmt_str):
     lines = gmt_str.split("\n")
@@ -86,7 +87,7 @@ def main():
     G = nx.relabel_nodes(G, relabels)
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
-    nx.write_dot(G, 'plot.dot')
+    write_dot(G, 'plot.dot')
     os.system("dot plot.dot -T png > plot.png")
     
     plt.subplot(111)
