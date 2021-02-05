@@ -1,0 +1,41 @@
+id: MSigDBFoldExpSet-{VER}
+meta:
+  title: MSIGDB fold expression sets {VER}
+  subtitle: Apply MSIGDB information to differentially expressed gene sets
+  description: >
+    MSigDB allows the analysis of gene sets to determine if pathways or tissue types are active in the clusters.
+endpoints:
+  backend:
+    cmd: python ./msigdbfoldexprset.py
+    type: docker
+    image: {GBOX}
+frontend:
+  args:
+    - min: 0.0
+      step: 0.1
+      type: number
+      label: Min zscore (to use for filtering sets that are not well expressed)
+      default: 1.0
+      injectInto: min_zscore
+    - type: select
+      label: The database for the enrichement analysis
+      choices:
+        - label: Gene Ontology (GO)
+          value: go
+          description: >
+            Gene Ontology (GO) term enrichment is a technique for interpreting
+            sets of genes making use of the Gene Ontology system of
+            classification, in which genes are assigned to a set of predefined
+            bins depending on their functional characteristics. (From wikipedia)
+        - label: Kyoto Encyclopedia of Genes and Genomes (KEGG)
+          value: kegg
+          description: >
+            Kyoto Encyclopedia of Genes and Genomes (KEGG) is a collection of
+            databases dealing with genomes, biological pathways, diseases,
+            drugs, and chemical substances. (From wikipedia)
+      default: go
+      injectInto: gset_group_id
+  imports:
+    - kind: assay
+      label: Cluster set comparison for each gene
+      injectInto: clustersvsgenes
