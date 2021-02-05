@@ -90,7 +90,7 @@ def main():
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
     write_dot(G, 'plot.dot')
-    os.system("dot plot.dot -Tpng -Kneato -Gdpi=600 > plot.png")
+    os.system("dot plot.dot -Tpng -Kcirco -Gdpi=600 > plot.png")
     with open('plot.png', "rb") as f:
         image_b64 = b64encode(f.read()).decode("utf-8")
 
