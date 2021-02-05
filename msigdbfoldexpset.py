@@ -62,8 +62,10 @@ def main():
     resultsmap = {}
     relabels = {}
     keys = {}
+    urlsforkeys = {}
     currentkeyindex = 0
     for gset in gsets:
+        urlsforkeys[gset["name"]] = gset["url"]
         for cluster in clustercomparisonstotest:
             try:
                 resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
@@ -109,7 +111,7 @@ def main():
 
     footnote = ""
     for k, v in sorted(keys.items(), key=lambda item: item[1]):
-        newstr = "{}: [{}]({})".format(v, k, gsets[k]["url"])
+        newstr = "{}: [{}]({})".format(v, k, urlsforkeys[k])
         if footnote == "" :
             footnote = newstr
         else:
