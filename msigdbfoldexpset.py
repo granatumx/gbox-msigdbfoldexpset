@@ -45,7 +45,7 @@ def main():
     clustercomparisonstotest = list(clustersvsgenes.index)
 
     # Load all gene sets
-    gsets = load_gsets(gset_group_id)
+    gsets = load_gsets(gset_group_id_to_filename[gset_group_id])
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
