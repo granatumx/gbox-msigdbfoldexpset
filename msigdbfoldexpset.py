@@ -74,13 +74,14 @@ def main():
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
-                            relabel_dict = gset["name"]
+                            relabel_dict = from_to[0] + ": " + gset["name"]
                         else:
                             relabel_dict = relabel_dict + ", " + gset["name"]
                         relabels[from_to[0]] = relabel_dict
             except:
                 print("Key error with {}".format(gset["name"]), flush=True)
 
+    G = nx.relabel_nodes(G, relabels)
     plt.subplot(111)
     pos = nx.spring_layout(G)
     nx.draw(G, pos, node_size=100, with_labels=True, font_weight='bold')
