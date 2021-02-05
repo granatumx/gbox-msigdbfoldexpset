@@ -27,9 +27,7 @@ gset_group_id_to_filename = {
 
 def load_gsets(gset_group_id):
     data_fn = gset_group_id_to_filename[gset_group_id]
-    gmt_str = pkg_resources.resource_string(__name__, f"{data_fn}")
-    gmt_str = str(gmt_str, "utf-8")
-    gsets = parse_gmt(gmt_str)
+    gsets = parse_gmt(open(data_fn, 'r').read())
 
     return gsets
 
@@ -45,7 +43,7 @@ def main():
     clustercomparisonstotest = list(clustersvsgenes.index)
 
     # Load all gene sets
-    gsets = load_gsets(gset_group_id_to_filename[gset_group_id])
+    gsets = load_gsets(gset_group_id)
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
