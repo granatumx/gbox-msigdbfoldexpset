@@ -80,9 +80,9 @@ def main():
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
-                            relabel_dict = from_to[0] + ": " + currentkeyindex
+                            relabel_dict = from_to[0] + ": " + str(currentkeyindex)
                         else:
-                            relabel_dict = relabel_dict + ", " + currentkeyindex
+                            relabel_dict = relabel_dict + ", " + str(currentkeyindex)
                         relabels[from_to[0]] = relabel_dict
                     currentkeyindex = currentkeyindex + 1
             except Exception as inst:
