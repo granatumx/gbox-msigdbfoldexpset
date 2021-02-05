@@ -51,6 +51,7 @@ def main():
         for cluster in clustercomparisonstotest:
             print("Cluster = {}".format(cluster), flush=True)
             print("Gene ids = {}".format(gset["gene_ids"]), flush=True)
+            print(clustervsgenes.loc[cluster, gset["gene_ids"]], flush=True)
             score = clustersvsgenes.loc[cluster, gset["gene_ids"]].min()
             if score >= min_zscore:
                 resultsmap[gset["name"]] = resultsmap.get(gset["name"], {}) + {cluster: score}
