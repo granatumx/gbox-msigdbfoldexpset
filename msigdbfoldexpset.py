@@ -87,7 +87,7 @@ def main():
     edge_labels = nx.get_edge_attributes(G, 'label')
     plt.subplot(111)
     nx.draw(G, pos, with_labels=True, node_size=10000)
-    nx.draw_networkx_edge_labels(G, pos, edge_labels)
+    # nx.draw_networkx_edge_labels(G, pos, edge_labels)
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
