@@ -50,7 +50,7 @@ def main():
     clusternames = list(clustersvsgenes.T.columns)
     individualclusters = [n[:n.index(" vs rest")] for n in clusternames if n.endswith("vs rest")]
     print(individualclusters, flush=True)
-    for cl in individualclusters
+    for cl in individualclusters:
         G.add_node(cl)
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
