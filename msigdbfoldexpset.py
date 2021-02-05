@@ -53,8 +53,11 @@ def main():
                 resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
                 score = np.nansum(resultdf)
                 if score >= min_zscore:
-                    resultsmap[gset["name"]] = resultsmap.get(gset["name"], {}) + {cluster: score}
-                    print(score, flush=True)
+                    print("Score = {}".format(score))
+                    olddict = resultsmap.get(gset["name"], {})
+                    olddict[cluster] = score
+                    resultsmap[gset["name"]] = olddict
+                    print("Done adding score", flush=True)
             except:
                 print("Key error with {}".format(gset["name"]), flush=True)
 
