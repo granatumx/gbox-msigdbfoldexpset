@@ -72,14 +72,14 @@ def main():
                     olddict[cluster] = score
                     resultsmap[gset["name"]] = olddict
                     from_to = re.split(' vs ', cluster)
-                    if len(from_to) > 1:
+                    if from_to[1] != 'rest':
                         G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
                             relabel_dict = from_to[0] + ": " + gset["name"]
                         else:
-                            relabel_dict = relabel_dict + ", " + gset["name"]
+                            relabel_dict = relabel_dict + "\\n " + gset["name"]
                         relabels[from_to[0]] = relabel_dict
             except Exception as inst:
                 print("Key error with {}".format(gset["name"]), flush=True)
