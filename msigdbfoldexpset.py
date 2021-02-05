@@ -6,6 +6,7 @@ import numpy as np
 import time
 import math
 from granatum_sdk import Granatum
+import networkx as nx
 
 def parse_gmt(gmt_str):
     lines = gmt_str.split("\n")
@@ -44,6 +45,12 @@ def main():
 
     # Load all gene sets
     gsets = load_gsets(gset_group_id)
+
+    G = nx.Graph()
+    node
+    clusternames = list(clustersvsgenes.T.columns)
+    individualclusters = [n[:n.index(" vs rest")] for n in clusternames if n.endswith("vs rest")]
+    print(individualclusters, flush=True)
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
