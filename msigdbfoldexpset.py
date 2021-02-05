@@ -110,8 +110,6 @@ def main():
     for k, v in sorted(keys.items(), key=lambda item: item[1]):
         gn.add_result("{}: {}".format(v, k), "markdown")
 
-    timing = "* Finished differential expression sets step in {} seconds*".format(time_passed)
-    gn.add_result(timing, "markdown")
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
     toc = time.perf_counter()
