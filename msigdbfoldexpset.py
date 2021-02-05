@@ -89,14 +89,14 @@ def main():
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
     write_dot(G, 'plot.dot')
-    os.system("dot plot.dot -Tpng -Gsize=5,4\\! -Gdpi=100 > plot.png")
+    os.system("dot plot.dot -Tpng -Gsize=5,4\\! -Gdpi=300 > plot.png")
     
     plt.subplot(111)
     plt.imshow(mpimg.imread('plot.png'), aspect="auto")
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
-    gn.add_current_figure_to_results(caption, zoom=1, dpi=75)
+    gn.add_current_figure_to_results(caption, zoom=1, dpi=300)
     
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
