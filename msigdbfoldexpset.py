@@ -90,13 +90,18 @@ def main():
     edge_labels = nx.get_edge_attributes(G, 'label')
     write_dot(G, 'plot.dot')
     os.system("dot plot.dot -Tpng -Gsize=5,4\\! -Gdpi=600 > plot.png")
-    
-    plt.subplot(111)
-    plt.imshow(mpimg.imread('plot.png'), aspect="auto")
+    with open('plot.png', "rb") as f:
+        image_b64 = b64encode(f.read()).decode("utf-8")
 
-    caption = ( 'Network of clusters based on expression')
-    gn.add_current_figure_to_results(caption, width=5000, height=4000)
-    
+    gn.results.append(
+        {
+                "type": "png",
+                "width": 650,
+                "height": 480,
+                "description": 'Network of clusters based on expression',
+                "data": image_b64,
+            })
+
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
     toc = time.perf_counter()
