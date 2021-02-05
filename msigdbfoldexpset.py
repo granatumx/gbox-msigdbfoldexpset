@@ -53,7 +53,7 @@ def main():
             print("Gene ids = {}".format(gset["gene_ids"]), flush=True)
             resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
             print(resultdf, flush=True)
-            score = min(resultdf.dropna().values())
+            score = np.nanmin(resultdf)
             print("Score = {}".format(score), flush=True)
             if score >= min_zscore:
                 resultsmap[gset["name"]] = resultsmap.get(gset["name"], {}) + {cluster: score}
