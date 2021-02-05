@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from base64 import b64encode
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
