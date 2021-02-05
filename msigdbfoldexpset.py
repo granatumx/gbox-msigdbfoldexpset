@@ -2,6 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import numpy as np
 import time
 import math
@@ -85,9 +86,11 @@ def main():
     G = nx.relabel_nodes(G, relabels)
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
+    nx.write_dot(G, 'plot.dot')
+    os.system("dot plot.dot -T png > plot.png")
+    
     plt.subplot(111)
-    nx.draw(G, pos, with_labels=True, node_size=10000)
-    # nx.draw_networkx_edge_labels(G, pos, edge_labels)
+    plt.imshow(mpimg.imread('plot.png'))
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
