@@ -95,7 +95,7 @@ def main():
     plt.imshow(mpimg.imread('plot.png'), aspect="auto")
 
     caption = ( 'Network of clusters based on expression')
-    gn.add_current_figure_to_results(caption, dpi=100)
+    gn.add_current_figure_to_results(caption, width=5000, height=4000)
     
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
