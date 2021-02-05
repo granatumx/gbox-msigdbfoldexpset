@@ -113,7 +113,7 @@ def main():
         if footnote == "" :
             footnote = newstr
         else:
-            footnote = "\n"+footnote
+            footnote = "  \\n"+footnote
 
     gn.add_result(footnote, "markdown")
 
