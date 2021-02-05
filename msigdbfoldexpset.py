@@ -70,7 +70,6 @@ def main():
                     olddict = resultsmap.get(gset["name"], {})
                     olddict[cluster] = score
                     resultsmap[gset["name"]] = olddict
-                    print("Done adding score", flush=True)
                     from_to = re.split(' vs ', cluster)
                     if len(from_to) > 1:
                         G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
@@ -85,6 +84,7 @@ def main():
                 print("Key error with {}".format(gset["name"]), flush=True)
                 print("Exception: {}".format(inst), flush=True)
 
+    print("Relabels {}".format(relabels), flush=True)
     G = nx.relabel_nodes(G, relabels)
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
