@@ -72,7 +72,7 @@ def main():
                         G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
-                        if relabel_dict === "":
+                        if relabel_dict == "":
                             relabel_dict = gset["name"]
                         else:
                             relabel_dict = relabel_dict + ", " + gset["name"]
