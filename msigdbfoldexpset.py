@@ -39,7 +39,7 @@ def main():
     gn = Granatum()
 
     clustersvsgenes = gn.pandas_from_assay(gn.get_import('clustersvsgenes'))
-    gset_group_id = gn.get_import('gset_group_id')
+    gset_group_id = gn.get_arg('gset_group_id')
     min_zscore = gn.get_arg('min_zscore')
 
     clustercomparisonstotest = list(clustersvsgenes.index)
