@@ -47,7 +47,7 @@ def main():
     # Load all gene sets
     gsets = load_gsets(gset_group_id)
 
-    G = nx.DiGraph()
+    G = nx.MultiDiGraph()
     clusternames = list(clustersvsgenes.T.columns)
     individualclusters = [n[:n.index(" vs rest")] for n in clusternames if n.endswith("vs rest")]
     print(individualclusters, flush=True)
@@ -78,13 +78,15 @@ def main():
                         else:
                             relabel_dict = relabel_dict + ", " + gset["name"]
                         relabels[from_to[0]] = relabel_dict
-            except:
+            except Exception as inst:
                 print("Key error with {}".format(gset["name"]), flush=True)
+                print("Exception: {}".format(inst), flush=True)
 
     G = nx.relabel_nodes(G, relabels)
     plt.subplot(111)
     pos = nx.spring_layout(G)
-    nx.draw(G, pos, node_size=100, with_labels=True, font_weight='bold')
+    nx.draw(G, pos, with_labels=True, node_size=10000)
+    nx.draw_networkx_edge_labels(G)
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
