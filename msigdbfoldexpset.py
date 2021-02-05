@@ -10,6 +10,7 @@ from granatum_sdk import Granatum
 import networkx as nx
 import re
 from networkx.drawing.nx_agraph import write_dot
+import os
 
 def parse_gmt(gmt_str):
     lines = gmt_str.split("\n")
