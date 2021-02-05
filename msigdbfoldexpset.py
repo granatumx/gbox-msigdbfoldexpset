@@ -46,7 +46,7 @@ def main():
     # Load all gene sets
     gsets = load_gsets(gset_group_id)
 
-    G = nx.Graph()
+    G = nx.DiGraph()
     clusternames = list(clustersvsgenes.T.columns)
     individualclusters = [n[:n.index(" vs rest")] for n in clusternames if n.endswith("vs rest")]
     print(individualclusters, flush=True)
@@ -55,6 +55,7 @@ def main():
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
+    relabels = {}
     for gset in gsets:
         for cluster in clustercomparisonstotest:
             try:
@@ -66,11 +67,22 @@ def main():
                     olddict[cluster] = score
                     resultsmap[gset["name"]] = olddict
                     print("Done adding score", flush=True)
+                    from_to = Regex.Split(cluster, " vs ")
+                    if len(from_to) > 1:
+                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=gset["name"])
+                    else:
+                        relabel_dict = relabels.get(from_to[0], "")
+                        if relabel_dict === "":
+                            relabel_dict = gset["name"]
+                        else:
+                            relabel_dict = relabel_dict + ", " + gset["name"]
+                        relabels[from_to[0]] = relabel_dict
             except:
                 print("Key error with {}".format(gset["name"]), flush=True)
 
     plt.subplot(111)
-    nx.draw(G, with_labels=True, font_weight='bold')
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, node_size=100, with_labels=True, font_weight='bold')
     plt.tight_layout()
 
     caption = ( 'Network of clusters based on expression')
