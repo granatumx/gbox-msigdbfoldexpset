@@ -76,7 +76,7 @@ def main():
                     resultsmap[gset["name"]] = olddict
                     from_to = re.split(' vs ', cluster)
                     if from_to[1] != 'rest':
-                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*10.0)], label=str(currentkeyindex), penwidth=str(score*2.0))
+                        G.add_weighted_edges_from([(from_to[0], from_to[1], score*2.0)], label=str(currentkeyindex), penwidth=str(score*2.0))
                     else:
                         relabel_dict = relabels.get(from_to[0], "")
                         if relabel_dict == "":
@@ -107,8 +107,15 @@ def main():
                 "data": image_b64,
             })
 
+    footnote = ""
     for k, v in sorted(keys.items(), key=lambda item: item[1]):
-        gn.add_result("{}: {}".format(v, k), "markdown")
+        newstr = "{}: {}".format(v, k)
+        if footnote == "" :
+            footnote = newstr
+        else:
+            footnote = "\n"+footnote
+
+    gn.add_result(footnote, "markdown")
 
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
