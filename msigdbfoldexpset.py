@@ -89,7 +89,7 @@ def main():
     pos = nx.spring_layout(G)
     edge_labels = nx.get_edge_attributes(G, 'label')
     write_dot(G, 'plot.dot')
-    os.system("dot plot.dot -T png -G size=5,4\\! -G dpi=100 > plot.png")
+    os.system("dot plot.dot -Tpng -Gsize=5,4\\! -Gdpi=100 > plot.png")
     
     plt.subplot(111)
     plt.imshow(mpimg.imread('plot.png'), aspect="auto")
