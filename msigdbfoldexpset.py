@@ -47,10 +47,11 @@ def main():
     gsets = load_gsets(gset_group_id)
 
     G = nx.Graph()
-    node
     clusternames = list(clustersvsgenes.T.columns)
     individualclusters = [n[:n.index(" vs rest")] for n in clusternames if n.endswith("vs rest")]
     print(individualclusters, flush=True)
+    for cl in individualclusters
+        G.add_node(cl)
 
     # {pathway : {"cluster1":score1, "cluster2":score2}, pathway2 : {}}
     resultsmap = {}
@@ -68,8 +69,12 @@ def main():
             except:
                 print("Key error with {}".format(gset["name"]), flush=True)
 
-    print(resultsmap, flush=True)
-    time.sleep(5)
+    plt.subplot(111)
+    nx.draw(G, with_labels=True, font_weight='bold')
+    plt.tight_layout()
+
+    caption = ( 'Network of clusters based on expression')
+    gn.add_current_figure_to_results(caption, zoom=1, dpi=75)
     
     # gn.export(return_df.T.to_csv(), 'differential_gene_sets.csv', kind='raw', meta=None, raw=True)
 
