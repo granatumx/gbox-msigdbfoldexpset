@@ -69,8 +69,8 @@ def main():
         for cluster in clustercomparisonstotest:
             try:
                 resultdf = clustersvsgenes.loc[cluster, gset["gene_ids"]]
-                resultdf = np.nan_to_num(resultdf)
-                score = np.nanmean(resultdf)
+                resultdf = np.nan_to_num(resultdf, nan=-0.1)
+                score = np.nansum(resultdf)
                 if score >= min_zscore:
                     keys[gset["name"]] = keys.get(gset["name"], currentkeyindex+1)
                     print("Score = {}".format(score))
